@@ -11,8 +11,16 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { userNewUrlParser: true, useCreateIndex: true });
+const remoteDB = process.env.REMOTE_DB;
+const localDB = process.env.LOCAL_DB;
+
+const db = !remoteDB ? remoteDB : localDB;
+console.log(db);
+
+mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true })
+.catch((err) => {
+  console.log("Not Connected to Database ERROR! ", err);
+});
 const connection = mongoose.connection;
 
 connection.once('open', () => {
