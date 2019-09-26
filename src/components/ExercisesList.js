@@ -2,8 +2,10 @@ import React from 'react';
 
 function ExercisesList() {
     return (
-      <div>
-        <h1>Exercise List</h1>
+        <div className="container">
+        <div className="row">
+            <h1>Show Exercises</h1>
+        </div>
       </div>
     );
   }
