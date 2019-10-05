@@ -10,10 +10,9 @@ import NavBar from "./components/NavBar";
 
 function App() {
   return (
-    <div>
+    <div className="container">
     <Router>
       <NavBar />
-      <h1>Landing page</h1>
       <Route path="/" exact component={ExercisesList} />
       <Route path="/update/:id" component={UpdateExercises} />
       <Route path="/create" component={CreateExercise} />
