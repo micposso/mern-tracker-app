@@ -55,7 +55,7 @@ class CreateExercise extends Component {
 
   onSubmit(e) {
     e.preventDefault()
-    const [ username, description, duration, date ] = this.state;
+    const { username, description, duration, date } = this.state;
 
     const exercise = {
       username: username,
