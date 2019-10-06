@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+require('dotenv').config();
+const apiURL = process.env.REACT_APP_DEV_API_URL;
 
 class CreateUser extends Component {
   
@@ -27,6 +30,9 @@ class CreateUser extends Component {
     }
 
     console.log(user);
+
+    axios.post(`${apiURL}/users/add`, user)
+      .then(res => console.log(res.data));
 
     this.setState({
       username: ''

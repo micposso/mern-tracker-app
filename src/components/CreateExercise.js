@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
+require('dotenv').config();
+const apiURL = process.env.REACT_APP_DEV_API_URL;
 
 class CreateExercise extends Component {
 
@@ -23,10 +26,15 @@ class CreateExercise extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      users: ['marina', 'memo', 'miguel'],
-      username: 'test'
-    })
+    axios.get(`${apiURL}/users`)
+      .then(res => {
+        if (res.data.length > 0) {
+          this.setState({
+            users: res.data.map(user => user.username),
+            username: res.data[0].username
+          })
+        }
+      })
   }
 
   onChangeDescription(e) {
@@ -37,7 +45,7 @@ class CreateExercise extends Component {
 
   onChangeUsername(e) {
     this.setState({
-      username: e.taget.value
+      username: e.target.value
     })
   }
 
@@ -47,9 +55,9 @@ class CreateExercise extends Component {
     })
   }
 
-  onChangeDate(e) {
+  onChangeDate(date) {
     this.setState({
-      date: e.target.value
+      date: date
     })
   }
 
@@ -65,6 +73,9 @@ class CreateExercise extends Component {
     }
 
     console.log(exercise);
+
+    axios.post(`${apiURL}/exercises/add`, exercise)
+      .then(res => console.log(res.data));
 
     window.location = "/";
     
