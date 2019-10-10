@@ -12,7 +12,8 @@ class CreateUser extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      username: ''
+      username: '',
+      isSubmitted: false
     }
   }
 
@@ -35,7 +36,8 @@ class CreateUser extends Component {
       .then(res => console.log(res.data));
 
     this.setState({
-      username: ''
+      username: '',
+      isSubmitted: true
     })
   }
 
@@ -58,6 +60,7 @@ class CreateUser extends Component {
           <input type="submit" value="Create User" className="btn btn-primary" />
         </div>
       </form>
+      {this.state.isSubmitted && <h1>User has been added</h1>}
     </div>
     );
   }
